@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Complex Component Order</title>
+	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>	
+</head>
+
+<body>
+	<div id="root"></root>
+	<script type="text/babel">
+		
+		class Order extends React.Component{
+			render(){
+				return <div><h1>Order</h1>
+				<b>ID: {this.props.id}</b><br/>
+				<b>Name: {this.props.name}</b>
+				<b>Price: {this.props.price}</b>
+				<ShippingAddress address={this.props.address}/>
+				<PaymentInformation information={this.props.information}/>
+				</div>;
+
+			}
+		}
+
+		class ShippingAddress extends React.Component{
+			render(){
+				return <div><b>Address</b><br/>
+				Street:{this.props.address.street}<br/>
+				City:{this.props.address.city}<br/>
+				State:{this.props.address.State}<br/>
+				Country:{this.props.address.country}<br/>
+				Code:{this.props.address.code}<br/>
+				</div>
+			}
+		}
+
+		class PaymentInformation extends React.Component{
+			render(){
+				return <div><b>Information</b><br/>
+				Customer Name:{this.props.information.customerName}<br/>
+				Card Number:{this.props.information.cardno}<br/>
+				Expiry Date:{this.props.information.expiryDate}
+				</div>
+			}
+		}
+
+		var address1 ={
+			street: "mg road",
+			city:"bangalore",
+			State:"Karnataka",
+			country:"india",
+			code:"578432"
+		};
+
+		var information1 = {
+			customerName:"abcde",
+			cardno:123412341234,
+			expiryDate:"22/2/2222"
+		};
+
+		ReactDOM.render(<div><Order id="1" name="abcd" price="123" address={address1} information={information1}/></div>,document.getElementById("root"));
+	</script>
+</body>
+</html>
