@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assignment 6</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        </root>
+        <script type="text/babel">
+
+            const CARS = [{ make: "BMW", model: "X2", year: 2019 }];
+
+            class DisplayContent extends React.Component {
+
+                render() {
+                    var displayStyle = {
+                        backgroundColor: "pink",
+                        height: 20,
+                        textAlign: "center",
+                        padding: 10,
+                        margin: 10,
+                    };
+
+                    var content = this.props.content;
+
+                    return <tr>
+                        <td style={displayStyle}>{content.make}</td>
+                        <td style={displayStyle}>{content.model}</td>
+                        <td style={displayStyle}>{content.year}</td>
+                    </tr>
+                }
+            }
+
+            class Cars extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        cars: CARS,
+                        carsClone: CARS,
+                    };
+                }
+
+                handleUpdate(event) {
+                    alert("List of Cars is Updated!");
+                    this.setState({ cars: [{ make: "BMW", model: "X2", year: 2019 }, { make: "HONDA", model: "Accord", year: 2019 }] });
+                }
+
+                render() {
+                    var thStyle = {
+                        backgroundColor: "lime",
+                        border: 60,
+                        width: 100,
+                    };
+
+                    var tbStyle = {
+                        backgroundColor: "yellow",
+                        height: 30,
+                        textAlign: "center",
+                    };
+
+                    return <div>
+                        <h1>{this.props.title}</h1>
+                        <table style={tbStyle}>
+                            <thead style={thStyle}>
+                                <tr>
+                                    <td>Make</td>
+                                    <td>Model</td>
+                                    <td>Year</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.cars.map(car => <DisplayContent content={car} />)}
+                                <input type="button" value="update" onClick={this.handleUpdate.bind(this)} />
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+
+
+            ReactDOM.render(<Cars title="List of Cars" />, document.getElementById("root"));
+        </script>
+</body>
+
+</html>
